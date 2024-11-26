@@ -31,7 +31,7 @@ public class InputView {
                 isValidDate(day);
                 return day;
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+                System.out.println(INPUT_MESSAGE_UNAVLID_DATE);
             }
         }
     }
@@ -42,7 +42,7 @@ public class InputView {
             try {
                 String input = input(INPUT_MESSAGE_ORDER_MENU);
                 return makeOrderDetails(input);
-            } catch (RuntimeException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(INPUT_MESSAGE_UNVALID_ORDER);
             }
         }
@@ -57,10 +57,12 @@ public class InputView {
             IFood food = MenuUtil.getFoodByName(menuName);
             makeOrderDetaiHashMap(orderDetails, food, count);
         }
-        if (orderDetails.keySet().iterator().next() instanceof Drink) {
-            throw new IllegalArgumentException();
+        for (IFood food : orderDetails.keySet()) {
+            if (!(food instanceof Drink)) {
+                return orderDetails;
+            }
         }
-        return orderDetails;
+        throw new IllegalArgumentException();
     }
 
     private void makeOrderDetaiHashMap(HashMap<IFood, Integer> orderDetail, IFood food, int count) throws IllegalArgumentException{
