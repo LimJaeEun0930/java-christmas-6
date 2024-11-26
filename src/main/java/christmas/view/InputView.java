@@ -10,6 +10,18 @@ import christmas.menu.MenuUtil;
 import java.util.HashMap;
 
 public class InputView {
+    private static InputView inputView;
+
+    public static InputView getInstance() {
+        if (inputView == null) {
+            inputView = new InputView();
+        }
+        return inputView;
+    }
+
+    private InputView() {
+
+    }
 
     public int getVisitDate() {
         while (true) {
