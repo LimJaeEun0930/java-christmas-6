@@ -4,6 +4,7 @@ import static christmas.Constants.*;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.exception.UnvalidDateException;
+import christmas.menu.Drink;
 import christmas.menu.IFood;
 import christmas.menu.MenuUtil;
 import java.util.HashMap;
@@ -42,12 +43,15 @@ public class InputView {
             String menuName = order.substring(0, order.indexOf('-'));
             int count = Integer.parseInt(order.substring(order.indexOf('-') + 1));
             IFood food = MenuUtil.getFoodByName(menuName);
-            makeHashMap(orderDetails, food, count);
+            makeOrderDetaiHashMap(orderDetails, food, count);
+        }
+        if (orderDetails.keySet().iterator().next() instanceof Drink) {
+            throw new IllegalArgumentException();
         }
         return orderDetails;
     }
 
-    private void makeHashMap(HashMap<IFood, Integer> orderDetail, IFood food, int count) throws IllegalArgumentException{
+    private void makeOrderDetaiHashMap(HashMap<IFood, Integer> orderDetail, IFood food, int count) throws IllegalArgumentException{
         int sum = 0;
         for (Integer foodCount : orderDetail.values()) {
             sum += foodCount;
