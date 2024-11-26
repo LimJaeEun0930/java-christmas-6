@@ -1,6 +1,6 @@
 package christmas.menu;
 
-public enum Dessert {
+public enum Dessert implements IFood{
     CHOCOLATE_CAKE("초코케이크", 15000), ICE_CREAM("아이스크림", 5000);
 
     private String name;
@@ -17,5 +17,15 @@ public enum Dessert {
 
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public String getMenuName() {
+        return getName();
+    }
+
+    @Override
+    public int getMenuPrice() {
+        return getPrice();
     }
 }

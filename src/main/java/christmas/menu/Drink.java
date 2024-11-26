@@ -1,6 +1,6 @@
 package christmas.menu;
 
-public enum Drink {
+public enum Drink implements IFood {
     ZERO_COKE("제로콜라", 3000), RED_WINE("레드와인", 60000), CHAMPAGNE("샴페인", 25000);
     private String name;
     private int price;
@@ -16,5 +16,15 @@ public enum Drink {
 
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public String getMenuName() {
+        return getName();
+    }
+
+    @Override
+    public int getMenuPrice() {
+        return getPrice();
     }
 }
